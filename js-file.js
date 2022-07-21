@@ -8,6 +8,9 @@ let answer = document.querySelector('.answer');
 let numbers2 = document.getElementsByClassName('number');
 let buttons = document.querySelector('.buttons');
 let equal = document.querySelector('.equals');
+let del = document.querySelector('.delete');
+
+let num2Del = false;
 let num1 = "";
 let num2 = "";
 let expression = "";
@@ -35,27 +38,79 @@ numbers.forEach(number => number.addEventListener('click', numberInsert));
 operators.forEach(operator => operator.addEventListener('click', operatorInsert));
 
 function numberInsert(e) {
-    answer.innerText += e.target.innerText;
-    calculation.innerText += e.target.innerText;
+    num2Del = false;
     if (expression === "") {
+        if (e.target.innerText === "." && ((typeof num1 == "string" && num1.includes(".")) || (num1.toString().includes(".")))) {
+            console.log("hello1");
+            return;
+        }
+        if (e.target.innerText === "+/-") {
+            console.log("plus negative");
+            /*if (typeof num1 !== "string") {
+                num1 = num1.toString();
+            }*/
+            if (num1 === "") {
+                answer.innerText = "-";
+                calculation.innerText = "-";
+                num1 = "-";
+                return;
+            }
+            num1 /= -1;
+            num1 = num1.toString();
+            answer.innerText = num1;
+            //calculation.innerText = e.target.innerText;
+            return;
+        }
+        answer.innerText += e.target.innerText;
+        calculation.innerText += e.target.innerText;
         num1 += e.target.innerText;
         console.log("num1: " + num1);
     } else {
-        if (num2 === "") {
-            answer.innerText= e.target.innerText;
+        if (e.target.innerText === "+/-") {
+            console.log("plus negative");
+            /*if (typeof num2 !== "string") {
+                num2 = num2.toString();
+            }*/
+            if (num2 === "") {
+                answer.innerText = "-";
+                calculation.innerText += "-";
+                num2 = "-";
+                return;
+            }
+            num2 /= -1;
+            num2 = num2.toString();
+            answer.innerText = num2;
+            //calculation.innerText = e.target.innerText;
+            return;
         }
+        if (num2 === "") {
+            answer.innerText = e.target.innerText;
+            calculation.innerText += e.target.innerText;
+            num2 += e.target.innerText;
+            return;
+        }
+        if (e.target.innerText === "." && ((typeof num2 == "string" && num2.includes(".")) || (num2.toString().includes(".")))) {
+            console.log("hello2");
+            return;
+        }
+        answer.innerText += e.target.innerText;
+        calculation.innerText += e.target.innerText;
         num2 += e.target.innerText;
+        console.log("num2: " + num1);
     }
     
 }
 function operatorInsert(e) {
+    if (expression !== "" && num2 === "") {
+        return;
+    }
     if (num2 !== "") {
         let ans = equalOperation();
         expression = e.target.innerText;
         num1 = ans;
-        calculation.innerText = ans + "      " + expression;
+        calculation.innerText = ans  + expression;
     } else {
-        calculation.innerText += "      " + e.target.innerText;
+        calculation.innerText += e.target.innerText;
         expression = e.target.innerText;
     }
 }
@@ -83,117 +138,38 @@ function equalOperation() {
         ans = n1 / n2;
         console.log(ans);
         expression = "";
+    } else if (expression == "^") {
+        ans = Math.pow(n1, n2);
+        console.log(ans);
+        expression = "";
     }
     num1 = ans;
     answer.innerText = ans;
-    calculation.innerText = ans + "      " + expression;
+    calculation.innerText = ans + expression;
     return ans;
 }
 ac.addEventListener('click', () => { // ac button
-    answer.innerHTML = "";
-    calculation.innerHTML = "";
+    answer.innerText = "";
+    calculation.innerText = "";
     num1 = "";
     num2 = "";
 });
+del.addEventListener('click', () => {
+    if (num2 !== "") {
+        // delete num2
+        if (typeof num2 == "number") {
+            num2 = num2.toString();
+        }
+        num2Del = true;
+        num2 = num2.slice(0, -1);
+        answer.innerText = num2;
+    } else if (num1 !== "" && !num2Del) {
+        // delete num1
+        if (typeof num1 == "number") {
+            num1 = num1.toString();
+        }
+        num1 = num1.slice(0, -1);
+        answer.innerText = num1;
+    }
+});
 
-/*
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <script src="js-file.js" defer></script>
-    <title>Document</title>
-</head>
-<body>
-    <h2>Calculator!</h2>
-    <div class="main">
-        <div class="answer-box">
-            <div class="calculation"> 
-                8 * 9 * 10;
-            </div>
-            <div class="answer">
-                72 * 10
-            </div>
-        </div>
-        <div class="buttons">
-            <div class="row fifth"> 
-                <button class="button ac" style="background-color: green;">
-                    ac
-                </button>
-                <button class="button plusminus" style="background-color: green;">
-                    +/-
-                </button>
-                <button class="button power" style="background-color: green;">
-                    exp
-                </button>
-                <button class="button equals">
-                    =
-                </button>
-            </div>
-            <div class="row fourth">
-                <button class="button number 7">
-                    7
-                </button>
-                <button class="button number 8">
-                    8
-                </button>
-                <button class="button number 9">
-                    9
-                </button>
-                <button class="button divide operation">
-                    /
-                </button>
-            </div>
-            <div class="row third">
-                <button class="button number 4">
-                    4
-                </button>
-                <button class="button number 5">
-                    5
-                </button>
-                <button class="button number 6">
-                    6
-                </button>
-                <button class="button multiply operation">
-                    x
-                </button>
-            </div>
-            <div class="row second">
-                <button class="button number 1">
-                    1
-                </button>
-                <button class="button number 2">
-                    2
-                </button>
-                <button class="button number 3">
-                    3
-                </button>
-                <button class="button subtract operation">
-                    -
-                </button>
-            </div>
-            <div class="row first">
-                <button class="button number 0">
-                    0
-                </button>
-                <button class="button number ." style="background-color: green;">
-                    .
-                </button>
-                <button class="button delete" style="background-color: green;">
-                    del
-                </button>
-                <button class="button add operation">
-                    +
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        Developed by Ishaan Sharma
-    </div>
-</body>
-</html>
-*/

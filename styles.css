@@ -9,7 +9,7 @@ body {
 
 .main {
     display: flex;
-    width: 288px;
+    width: 350px;
     padding: 12px;
     padding-bottom: 0;
     background-color: purple;
