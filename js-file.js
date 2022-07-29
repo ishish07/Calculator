@@ -45,6 +45,7 @@ function numberInsert(e) { // Numbers and +/-
             num1 /= -1;
             num1 = num1.toString();
             answer.innerText = num1;
+            calculation.innerText = num1;
             return;
         }
         answer.innerText += e.target.innerText;
@@ -61,6 +62,11 @@ function numberInsert(e) { // Numbers and +/-
             num2 /= -1;
             num2 = num2.toString();
             answer.innerText = num2;
+            let temp = calculation.innerText;
+            let index = temp.indexOf(expression);
+            console.log(index);
+            temp = temp.slice(0, index + 1) + "    -" + temp.slice(index + 2);
+            calculation.innerText = temp;
             return;
         }
         if (num2 === "") {

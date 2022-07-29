@@ -1,24 +1,25 @@
 body {
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
-    background-color: lightblue;
+    background-color: #ff895d;
     min-height: 100vh;
+    
 }
 
 .main {
     display: flex;
-    width: 350px;
+    width: 300px;
     padding: 12px;
     padding-bottom: 0;
-    background-color: purple;
+    background-color: #78bbe6;
     margin-top: 32px;
-    border: solid green 7px;
+    border: solid #1b435d 7px;
     border-radius: 10px;
     justify-content: center;
     flex-direction: column;
     margin-bottom: 150px;
+    
 }
 
 .answer-box {
@@ -27,8 +28,8 @@ body {
     border-radius: 10px;
     flex-basis: 138px;
     margin-bottom: 12px;
-    background-color: grey;
-    border: solid grey 3px;
+    background-color: #d5eeff;
+    border: solid #d5eeff 3px;
     justify-content: space-between;
 }
 
@@ -36,16 +37,22 @@ body {
 .calculation {
     display: flex;
     justify-content: flex-end;
-    border: solid grey 1px;
+    border: solid #d5eeff 1px;
     border-radius: 10px;
+    background-color: #d5eeff;
 }
 
-.calculation {
-    background-color: grey;
+.number {
+    background-color: #1b435d;
+    color: white;
+}
+
+.other {
+    color: black;
+    background-color: #d5eeff;
 }
 
 .answer {
-    background-color: grey;
     font-size: 36px;
 }
 
@@ -66,24 +73,11 @@ body {
     height: 60px;
     width: 60px;
     border-radius: 50%;
-    background-color: white;
     justify-content: center;
     align-items: center;
     border: solid black 2px;
 }
 
-.number {
-    background-color: orange;
-}
-
-.footer {
-    display: flex;
-    background-color: purple;
-    margin-top: auto;
-    justify-content: center;
-    align-items: center;
-    padding: 24px;
-    color: white;
-    font-size: 15px;
-    width: 100%;
+.operation {
+    background-color: #ff895d;
 }
