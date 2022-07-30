@@ -4,7 +4,12 @@ body {
     align-items: center;
     background-color: #ff895d;
     min-height: 100vh;
+    flex-direction: column;
     
+}
+
+h1 {
+    color: #d5eeff;
 }
 
 .main {
@@ -12,7 +17,7 @@ body {
     width: 300px;
     padding: 12px;
     padding-bottom: 0;
-    background-color: #78bbe6;
+    background-color: #1b435d;
     margin-top: 32px;
     border: solid #1b435d 7px;
     border-radius: 10px;
@@ -31,6 +36,7 @@ body {
     background-color: #d5eeff;
     border: solid #d5eeff 3px;
     justify-content: space-between;
+    overflow: hidden;
 }
 
 .answer,
@@ -43,13 +49,16 @@ body {
 }
 
 .number {
-    background-color: #1b435d;
-    color: white;
+    background-color: #78bbe6;
+    color: black;
+    font-weight: bold;
+    
 }
 
 .other {
     color: black;
-    background-color: #d5eeff;
+
+    font-weight: bold;
 }
 
 .answer {
@@ -80,4 +89,5 @@ body {
 
 .operation {
     background-color: #ff895d;
+    font-weight: bold;
 }
