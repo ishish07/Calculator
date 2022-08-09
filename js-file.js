@@ -67,41 +67,11 @@ function numberInsertKey(e) { // Numbers and +/-
     if (expression === "") {
         if (e.key === "." && ((typeof num1 == "string" && num1.includes(".")) || (num1.toString().includes(".")))) {
             return;
-        }/*
-        if (e.target.innerText === "+/-") {
-            if (num1 === "") {
-                answer.innerText = "-";
-                calculation.innerText = "-";
-                num1 = "-";
-                return;
-            }
-            num1 /= -1;
-            num1 = num1.toString();
-            answer.innerText = num1;
-            calculation.innerText = num1;
-            return;
-        }*/
+        }
         answer.innerText += e.key;
         calculation.innerText += e.key;
         num1 += e.key;
     } else {
-        /*if (e.target.innerText === "+/-") {
-            if (num2 === "") {
-                answer.innerText = "-";
-                calculation.innerText += "    -";
-                num2 = "-";
-                return;
-            }
-            num2 /= -1;
-            num2 = num2.toString();
-            answer.innerText = num2;
-            let temp = calculation.innerText;
-            let index = temp.indexOf(expression);
-            console.log(index);
-            temp = temp.slice(0, index + 1) + "    -" + temp.slice(index + 2);
-            calculation.innerText = temp;
-            return;
-        }*/
         if (num2 === "") {
             answer.innerText = e.key;
             calculation.innerText += "    " + e.key;
@@ -244,7 +214,7 @@ function deletion() {
         num2 = num2.slice(0, -1);
         answer.innerText = num2;
         calculation.innerText = calculation.innerText.slice(0, -1);
-    } else if (num1 !== "" /*&& !num2Del*/ && expression === "") {
+    } else if (num1 !== "" && expression === "") {
         if (typeof num1 == "number") {
             num1 = num1.toString();
         }
